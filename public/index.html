@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maciej Nowakowski | Full Stack Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap"
+  rel="stylesheet"
+>
+<link rel="stylesheet" href="styles.css">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          night: "#050816",
+          panel: "#0d1325",
+          mist: "#e7f7ff",
+          cyan: "#86ecff",
+          gold: "#ffd48f",
+          line: "rgba(255, 255, 255, 0.12)"
+        },
+        fontFamily: {
+          display: ["Space Grotesk", "sans-serif"],
+          mono: ["IBM Plex Mono", "monospace"]
+        },
+        boxShadow: {
+          halo: "0 0 80px rgba(134, 236, 255, 0.18)"
+        }
+      }
+    }
+  }
+</script>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+
+<body class="bg-night text-mist antialiased">
+
+<div class="pointer-events-none fixed inset-0 overflow-hidden">
+  <div class="ambient-orb left-[-5rem] top-[6rem] h-56 w-56 bg-cyan/30"></div>
+  <div class="ambient-orb orb-delay-4 right-[10%] top-[18rem] h-72 w-72 bg-gold/20"></div>
+  <div class="ambient-orb orb-delay-8 bottom-[8rem] left-[12%] h-64 w-64 bg-sky-500/10"></div>
+</div>
+
+<canvas id="bgCanvas" class="pointer-events-none fixed inset-0 -z-10 opacity-40"></canvas>
+<div class="scroll-progress">
+  <span id="scrollProgressBar" class="scroll-progress-bar"></span>
+</div>
+
+<div class="relative z-10">
+
+<header class="site-header sticky top-0 z-50 px-4 sm:px-6">
+  <div id="siteHeaderShell" class="site-header-shell gradient-stroke glass-card mx-auto flex max-w-7xl items-center justify-between rounded-full px-5 py-4 sm:px-7">
+    <a href="#top" class="flex items-center gap-3">
+      <span class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 font-mono text-sm text-cyan">
+        MN
+      </span>
+      <div>
+        <p class="text-sm font-medium text-white">Maciej Nowakowski</p>
+        <p class="font-mono text-[0.7rem] uppercase tracking-[0.35em] text-white/45">Full Stack Developer</p>
+      </div>
+    </a>
+
+    <nav class="hidden items-center gap-8 text-sm text-white/70 md:flex">
+      <a href="#projects" class="transition hover:text-white">Work</a>
+      <a href="#about" class="transition hover:text-white">About</a>
+      <a href="#contact" class="transition hover:text-white">Contact</a>
+    </nav>
+
+    <a
+      href="#contact"
+      class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white transition hover:border-cyan/40 hover:bg-white/10"
+    >
+      Start a Project
+    </a>
+  </div>
+</header>
+
+<main id="top" class="px-4 pb-16 pt-8 sm:px-6 lg:px-8">
+
+  <section class="reveal-on-scroll mx-auto grid max-w-7xl gap-8 py-12 lg:grid-cols-[1.3fr_0.9fr] lg:items-end lg:py-20">
+    <div class="hero-copy flex flex-col gap-8">
+      <p class="section-label">Creative Developer Portfolio</p>
+
+      <div class="max-w-4xl">
+        <p class="mb-5 font-mono text-sm uppercase tracking-[0.32em] text-cyan/80">Design-forward web experiences</p>
+        <h1 class="font-display text-4xl sm:text-6xl lg:text-8xl font-bold leading-tight text-white">
+          Building
+          <span class="spotlight-text">bold digital products</span>
+          with code, motion, and backend clarity.
+        </h1>
+      </div>
+
+      <p class="max-w-2xl text-lg leading-8 text-white/68 sm:text-xl">
+        I create polished portfolio websites, product landing pages, and full stack experiences that feel sharp, fast, and intentional.
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+        <a
+          href="#projects"
+          class="cta-primary inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-halo transition hover:-translate-y-0.5"
+        >
+          Explore Selected Work
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex items-center justify-center rounded-full border border-white/12 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-white/25 hover:bg-white/10"
+        >
+          Contact Me
+        </a>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="glass-card rounded-3xl p-5">
+          <p class="stat-kicker">Stack</p>
+          <p class="mt-3 text-2xl font-semibold text-white">TypeScript</p>
+          <p class="mt-2 text-sm leading-6 text-white/60">Tailwind, Node.js, Express, UI polish, and lightweight animation.</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-5">
+          <p class="stat-kicker">Focus</p>
+          <p class="mt-3 text-2xl font-semibold text-white">Clean Systems</p>
+          <p class="mt-2 text-sm leading-6 text-white/60">Readable frontend structure paired with practical backend integration.</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-5">
+          <p class="stat-kicker">Outcome</p>
+          <p class="mt-3 text-2xl font-semibold text-white">Memorable UX</p>
+          <p class="mt-2 text-sm leading-6 text-white/60">Interfaces that feel more premium than a template and still ship fast.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-5">
+      <div class="gradient-stroke glass-card overflow-hidden rounded-[2rem] p-7">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="section-label">Now Building</p>
+            <h2 class="mt-3 text-3xl font-semibold text-white">Portfolio websites with stronger visual identity.</h2>
+          </div>
+          <span class="rounded-full border border-cyan/25 bg-cyan/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.22em] text-cyan">
+            Live
+          </span>
+        </div>
+
+        <p class="mt-6 max-w-md text-base leading-7 text-white/64">
+          Inspired by modern developer portfolios, this layout leans into oversized typography, layered surfaces, and a more cinematic first impression.
+        </p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+            <p class="stat-kicker">What I design for</p>
+            <p class="mt-3 text-lg font-medium text-white">Personal brands, agencies, and product launches.</p>
+          </div>
+
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+            <p class="stat-kicker">What matters most</p>
+            <p class="mt-3 text-lg font-medium text-white">Strong first impression, clear structure, and fast interactions.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="glass-card rounded-[2rem] p-6">
+          <p class="section-label">Workflow</p>
+          <ol class="mt-4 space-y-3 text-sm leading-7 text-white/68">
+            <li><span class="text-white">01.</span> Define the visual direction and page hierarchy.</li>
+            <li><span class="text-white">02.</span> Build responsive sections with motion and contrast in mind.</li>
+            <li><span class="text-white">03.</span> Connect forms, APIs, and deployment-ready backend pieces.</li>
+          </ol>
+        </div>
+
+        <div class="glass-card rounded-[2rem] p-6">
+          <p class="section-label">Quick Snapshot</p>
+          <div class="mt-4 flex flex-wrap gap-3 text-sm text-white/72">
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">Landing Pages</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">Portfolios</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">REST APIs</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">Node Services</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">TypeScript</span>
+            <span class="rounded-full border border-white/10 bg-white/5 px-3 py-2">Tailwind</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal-on-scroll mx-auto max-w-7xl py-8">
+    <div class="glass-card grid gap-8 rounded-[2rem] p-6 md:grid-cols-[0.95fr_1.05fr] md:p-8">
+      <div class="space-y-4">
+        <p class="section-label">Visual Direction</p>
+        <h2 class="max-w-xl text-3xl font-semibold leading-tight text-white sm:text-4xl">
+          A portfolio should feel like a product, not just a list of sections.
+        </h2>
+      </div>
+
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+          <p class="stat-kicker">Editorial</p>
+          <p class="mt-3 text-base text-white/76">Large-scale headings and stronger pacing between sections.</p>
+        </div>
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+          <p class="stat-kicker">Layered</p>
+          <p class="mt-3 text-base text-white/76">Glass panels, grid texture, gradients, and restrained glow.</p>
+        </div>
+        <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+          <p class="stat-kicker">Practical</p>
+          <p class="mt-3 text-base text-white/76">Project filters, curated showcase cards, and a working contact endpoint remain intact.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="reveal-on-scroll mx-auto max-w-7xl py-20">
+    <div class="projects-shell gradient-stroke glass-card rounded-[2rem] p-6 sm:p-8 lg:p-10">
+      <div class="mb-10 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <p class="section-label">Selected Works</p>
+          <h2 class="mt-4 text-4xl font-semibold text-white sm:text-5xl">Curated projects, filtered by stack.</h2>
+          <p class="mt-4 text-base leading-7 text-white/64">
+            This section is curated directly inside the site, so you can show your strongest work without relying on external portfolio feeds.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap gap-3">
+          <button class="filterBtn rounded-full border border-cyan/30 bg-cyan/12 px-4 py-2 text-sm font-medium text-cyan transition hover:border-cyan/50" data-lang="all">
+            All
+          </button>
+          <button class="filterBtn rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/72 transition hover:border-white/25 hover:text-white" data-lang="javascript">
+            JavaScript
+          </button>
+          <button class="filterBtn rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-medium text-white/72 transition hover:border-white/25 hover:text-white" data-lang="typescript">
+            TypeScript
+          </button>
+        </div>
+      </div>
+
+      <div id="projectsContainer" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">></div>
+    </div>
+  </section>
+
+  <section class="reveal-on-scroll mx-auto max-w-7xl py-10">
+    <div class="grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+      <div class="glass-card rounded-[2rem] p-7">
+        <p class="section-label">What You Get</p>
+        <h2 class="mt-4 text-3xl font-semibold text-white">A portfolio that sells your work, not your commit history.</h2>
+        <p class="mt-4 text-base leading-7 text-white/64">
+          Instead of external widgets, this block now focuses on what visitors actually care about: what you build, how it feels, and what kind of result they can expect.
+        </p>
+
+        <div class="mt-8 grid gap-4">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+            <p class="stat-kicker">Websites</p>
+            <p class="mt-3 text-lg font-medium text-white">Portfolio sites, landing pages, and product-focused marketing pages.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+            <p class="stat-kicker">Systems</p>
+            <p class="mt-3 text-lg font-medium text-white">Clean frontend structure, practical backend routes, and contact flows that actually work.</p>
+          </div>
+        </div>
+
+        <a
+          href="#contact"
+          class="mt-8 inline-flex rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-white transition hover:border-cyan/40 hover:bg-white/10"
+        >
+          Need a website like this?
+        </a>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2">
+        <div class="glass-card rounded-[2rem] p-6">
+          <p class="section-label">01 Build Types</p>
+          <ul class="mt-4 space-y-3 text-sm leading-7 text-white/70">
+            <li>Modern developer portfolios</li>
+            <li>Animated hero sections and custom UI</li>
+            <li>Lead-generation landing pages</li>
+            <li>Express-backed contact workflows</li>
+          </ul>
+        </div>
+
+        <div class="glass-card rounded-[2rem] p-6">
+          <p class="section-label">02 Delivery Stack</p>
+          <ul class="mt-4 space-y-3 text-sm leading-7 text-white/70">
+            <li>HTML and Tailwind for fast interface building</li>
+            <li>TypeScript for maintainable frontend behavior</li>
+            <li>Node.js and Express for backend handling</li>
+            <li>Polish, motion, and responsive structure</li>
+          </ul>
+        </div>
+
+        <div class="gradient-stroke glass-card rounded-[2rem] p-6 md:col-span-2">
+          <p class="section-label">03 Why It Lands Better</p>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <p class="text-lg font-medium text-white">Looks custom</p>
+              <p class="mt-2 text-sm leading-6 text-white/62">Stronger typography, layered surfaces, and a more intentional first impression.</p>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <p class="text-lg font-medium text-white">Feels smooth</p>
+              <p class="mt-2 text-sm leading-6 text-white/62">Controlled scroll, cleaner transitions, and interaction states that feel finished.</p>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <p class="text-lg font-medium text-white">Ships clean</p>
+              <p class="mt-2 text-sm leading-6 text-white/62">The site stays practical to maintain without relying on external showcase widgets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <section id="about" class="reveal-on-scroll mx-auto max-w-7xl py-20">
+    <div class="grid gap-6 lg:grid-cols-[1fr_1.05fr]">
+      <div class="glass-card rounded-[2rem] p-7 sm:p-8">
+        <p class="section-label">About Me</p>
+        <h2 class="mt-4 text-4xl font-semibold text-white">Full stack development with a sharper front-end eye.</h2>
+        <p class="mt-5 text-base leading-8 text-white/66">
+          The goal is simple: build websites that do not feel disposable. Strong typography, better spacing, focused sections, and backend pieces that support the experience instead of slowing it down.
+        </p>
+        <p class="mt-4 text-base leading-8 text-white/66">
+          This version moves your portfolio closer to the tone of modern creator and freelancer websites, with a more intentional visual language and better storytelling through layout.
+        </p>
+      </div>
+
+      <div class="grid gap-6">
+        <div class="grid gap-6 md:grid-cols-2">
+          <div class="glass-card rounded-[2rem] p-6">
+            <p class="section-label">Frontend</p>
+            <ul class="mt-4 space-y-3 text-sm leading-7 text-white/70">
+              <li>Responsive section systems</li>
+              <li>Motion-led hero layouts</li>
+              <li>Tailwind and utility-first styling</li>
+              <li>Clean TypeScript structure</li>
+            </ul>
+          </div>
+
+          <div class="glass-card rounded-[2rem] p-6">
+            <p class="section-label">Backend</p>
+            <ul class="mt-4 space-y-3 text-sm leading-7 text-white/70">
+              <li>Express APIs and routes</li>
+              <li>Mail and contact workflows</li>
+              <li>Environment-based config</li>
+              <li>Practical deployment readiness</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="gradient-stroke glass-card rounded-[2rem] p-6 sm:p-7">
+          <p class="section-label">Why This Feels Better</p>
+          <div class="mt-5 grid gap-4 md:grid-cols-3">
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <p class="text-lg font-medium text-white">Clear hierarchy</p>
+              <p class="mt-2 text-sm leading-6 text-white/62">The visitor immediately understands who you are and what you build.</p>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <p class="text-lg font-medium text-white">Better rhythm</p>
+              <p class="mt-2 text-sm leading-6 text-white/62">Large sections are broken into deliberate, premium-looking blocks.</p>
+            </div>
+            <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+              <p class="text-lg font-medium text-white">Stronger identity</p>
+              <p class="mt-2 text-sm leading-6 text-white/62">The design feels authored, not copied from a starter template.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="reveal-on-scroll mx-auto max-w-7xl py-20">
+    <div class="gradient-stroke glass-card grid gap-8 rounded-[2rem] p-7 sm:p-10 lg:grid-cols-[0.92fr_1.08fr]">
+      <div>
+        <p class="section-label">Contact</p>
+        <h2 class="mt-4 max-w-lg text-4xl font-semibold leading-tight text-white sm:text-5xl">
+          Have a project in mind? Let us build something with real presence.
+        </h2>
+        <p class="mt-5 max-w-xl text-base leading-8 text-white/66">
+          Use the form to send your message directly through the mail backend. The form IDs and endpoint integration stay compatible with the rest of the project.
+        </p>
+
+        <div class="mt-8 grid gap-4 sm:grid-cols-2">
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+            <p class="stat-kicker">Ideal for</p>
+            <p class="mt-3 text-lg font-medium text-white">Portfolio redesigns, landing pages, and product-style sites.</p>
+          </div>
+          <div class="rounded-3xl border border-white/10 bg-white/5 p-5">
+            <p class="stat-kicker">Built with</p>
+            <p class="mt-3 text-lg font-medium text-white">Tailwind styling, TypeScript behavior, and Express-powered contact flow.</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="contactForm" class="contact-form grid gap-4 rounded-[1.75rem] border border-white/10 bg-slate-950/40 p-5 sm:p-6">
+        <div class="grid gap-2">
+          <label for="name" class="text-sm font-medium text-white/74">Name</label>
+          <input id="name" type="text" placeholder="Your name" class="contact-input">
+        </div>
+
+        <div class="grid gap-2">
+          <label for="email" class="text-sm font-medium text-white/74">Email</label>
+          <input id="email" type="email" placeholder="you@example.com" class="contact-input">
+        </div>
+
+        <div class="grid gap-2">
+          <label for="message" class="text-sm font-medium text-white/74">Message</label>
+          <input id="message" placeholder="Tell me about the project, deadline, or idea." class="contact-input min-h-40 resize-y"></input>
+        </div>
+
+        <button type="submit" class="cta-primary contact-submit mt-2 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-halo transition hover:-translate-y-0.5">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer class="px-4 pb-10 sm:px-6 lg:px-8">
+  <div class="mx-auto flex max-w-7xl flex-col gap-4 border-t border-white/10 pt-6 text-sm text-white/42 sm:flex-row sm:items-center sm:justify-between">
+    <p>Maciej Nowakowski Portfolio</p>
+    <div class="flex flex-wrap gap-5">
+      <a href="#projects" class="transition hover:text-white">Work</a>
+      <a href="#about" class="transition hover:text-white">About</a>
+      <a href="#contact" class="transition hover:text-white">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+
+</div>
+</body>
+</html>
